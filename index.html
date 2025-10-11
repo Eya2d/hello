@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vegemail</title>
-  <!-- link style -->
   <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -27,24 +26,25 @@
       <button type="submit">Send</button>
 
       <!-- إعدادات إضافية -->
-      <input type="hidden" name="_subject" value="New message with image and button!">
+      <input type="hidden" name="_subject" value="New message with image and link!">
       <input type="hidden" name="_captcha" value="false">
 
-      <!-- نص الرسالة مع الزر -->
-      <input type="hidden" name="message" value="
-        <div style='font-family: Arial; text-align: center;'>
-          <h2>Thank you for your message!</h2>
-          <p>Click the button below to visit our website:</p>
-          <a href='https://canyonicon.vercel.app/' 
-             style='display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 8px;'>
-             Visit Canyonicon
-          </a>
-        </div>
-      ">
+      <!-- نص الرسالة مع رابط يشبه الزر -->
+      <textarea name="message" style="display:none;">
+Hello 👋
+
+Thank you for your message!
+
+Click the link below to visit our website:
+
+🔗 Visit Canyonicon → https://canyonicon.vercel.app/
+
+Best regards,
+Vegemail
+      </textarea>
     </form>
   </div>
 
-  <!-- link script -->
   <script src="script/script.js"></script>
 </body>
 </html>
