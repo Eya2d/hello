@@ -1,112 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vegemail</title>
-  <link rel="stylesheet" href="style/style.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .decoment {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    input, button {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-
-    button {
-      background: #4caf50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #45a049;
-    }
-  </style>
+  <!-- link style -->
+  <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
   <div class="decoment">
-    <form id="imageForm" action="https://formsubmit.co/eyadscript@gmail.com" method="POST" enctype="multipart/form-data">
-      <input type="email" id="email" name="email" placeholder="Enter email" required>
-      <input type="text" id="name" name="name" placeholder="Enter name" required>
-      
-      <!-- الصورة الناتجة -->
-      <input type="hidden" name="_subject" value="New Info Image" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="file" id="generatedImage" name="attachment" style="display:none;" />
+    <form 
+      action="https://formsubmit.co/eyadscript@gmail.com" 
+      method="POST" 
+      enctype="multipart/form-data">
 
-      <button type="button" id="generateBtn">Send</button>
+      <!-- البريد الإلكتروني -->
+      <input type="email" id="email" name="email" placeholder="Enter email" required>
+
+      <!-- الاسم -->
+      <input type="text" id="name" name="name" placeholder="Enter name" required>
+
+      <!-- رفع صورة -->
+      <input type="file" id="image" name="attachment" accept="image/*">
+
+      <!-- زر الإرسال -->
+      <button type="submit">Send</button>
+
+      <!-- إعدادات إضافية -->
+      <input type="hidden" name="_subject" value="New message with image and button!">
+      <input type="hidden" name="_captcha" value="false">
+
+      <!-- نص الرسالة مع الزر -->
+      <input type="hidden" name="message" value="
+        <div style='font-family: Arial; text-align: center;'>
+          <h2>Thank you for your message!</h2>
+          <p>Click the button below to visit our website:</p>
+          <a href='https://canyonicon.vercel.app/' 
+             style='display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 8px;'>
+             Visit Canyonicon
+          </a>
+        </div>
+      ">
     </form>
   </div>
 
-  <canvas id="canvas" width="600" height="300" style="display:none;"></canvas>
-
-  <script>
-    const form = document.getElementById('imageForm');
-    const generateBtn = document.getElementById('generateBtn');
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const imageInput = document.getElementById('generatedImage');
-
-    generateBtn.addEventListener('click', async () => {
-      const email = document.getElementById('email').value.trim();
-      const name = document.getElementById('name').value.trim();
-
-      if (!email || !name) {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      // رسم الخلفية
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // نص العنوان
-      ctx.fillStyle = "#333";
-      ctx.font = "bold 28px Arial";
-      ctx.fillText("User Information", 200, 60);
-
-      // نصوص المعلومات
-      ctx.font = "20px Arial";
-      ctx.fillText(`Name: ${name}`, 100, 130);
-      ctx.fillText(`Email: ${email}`, 100, 170);
-
-      ctx.fillStyle = "#4CAF50";
-      ctx.font = "italic 16px Arial";
-      ctx.fillText("Generated automatically by Vegemail", 100, 250);
-
-      // تحويل الصورة إلى ملف وإضافتها للنموذج
-      canvas.toBlob(blob => {
-        const file = new File([blob], "user_info.png", { type: "image/png" });
-        const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(file);
-        imageInput.files = dataTransfer.files;
-
-        // إرسال النموذج تلقائيًا بعد توليد الصورة
-        form.submit();
-      });
-    });
-  </script>
+  <!-- link script -->
+  <script src="script/script.js"></script>
 </body>
 </html>
